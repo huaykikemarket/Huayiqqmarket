@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HuaykikeMarket</title>
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');    
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    /* Header con imagen de fondo */
+    .header {
+      background-image: url('img/header-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      /*background-attachment: fixed;*/
+      height: 340px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 0 2rem 3rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /*background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+      z-index: 1;*/
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      color: rgb(231, 86, 18);
+      text-align: left;
+    }
+
+    .header-content h1 {
+      font-size: 4.0rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .header-content p {
+      font-size: 2.5rem;
+      font-weight: 300;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      font-family: 'Dancing Script', cursive;
+      opacity: 0.95;
+    }
+
+    /* Contenedor de productos */
+    .main {
+      padding: 3rem 0;
+      background-color: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #2c3e50;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .producto {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .producto:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Tooltip personalizado */
+    .tooltip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      z-index: 3;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 12px;
+      border: 5px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .producto:hover .tooltip {
+      opacity: 1;
+    }
+
+    /* Imagen del producto */
+    .producto img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      object-position: center;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.4s ease;
+    }
+
+    .producto:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Información del producto */
+    .info {
+      padding: 1.2rem;
+    }
+
+    .info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+      color: #2c3e50;
+    }
+
+    .info p {
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .precio {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .btn-whatsapp {
+      display: block;
+      width: 100%;
+      background-color: #25D366;
+      color: white;
+      text-align: center;
+      padding: 0.9rem 0;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #128C7E;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        height: 280px;
+        padding: 0 1rem 2rem 1rem;
+      }
+      .header-content h1 {
+        font-size: 2.2rem;
+      }
+      .header-content p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header con imagen de fondo -->
+  <header class="header">
+    <div class="header-content">
+      <h1>🛍️ HuaykikeMarket</h1>
+      <p>Al alcance de nuestros vecinos</p>
+    </div>
+  </header>
+
+  <!-- Sección de productos -->
+  <main class="main">
+    <div class="container">
+      <h2>Nuestros Productos</h2>
+      <div class="productos">
+
+        <!-- Producto 1 -->
+        <div class="producto">
+          <div class="tooltip">Arroz Provenzza</div>
+          <img src="img/arrozprovenzza.jpg" alt="Arroz Provenzza">
+          <div class="info">
+            <h3>Arroz Provenzza</h3>
+            <p>Arroz grano largo, 1 Kg.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20las%20Zapatillas%20Deportivas%20($49.990).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto">
+          <div class="tooltip">Arroz El Pais</div>
+          <img src="img/arrozsingluten.jpg" alt="Arroz El Pais">
+          <div class="info">
+            <h3>Arroz El Pais</h3>
+            <p>Arroz grano largo sin gluten, 1 Kg.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20el%20Reloj%20Inteligente%20($39.500).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto">
+          <div class="tooltip">Atun Lomitos</div>
+          <img src="img/atunaceite.jpg" alt="Atun Lomitos">
+          <div class="info">
+            <h3>Atun Lomitos</h3>
+            <p>1 tarro de lomitos al aceite, 100 Gr.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20la%20Funda%20para%20Celular%20($12.000).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="producto">
+          <div class="tooltip">Atun Lomitos</div>
+          <img src="img/atunagua.jpg" alt="Atun Lomitos">
+          <div class="info">
+            <h3>Atun Lomitos</h3>
+            <p>1 tarro de lomitos al agua, 100 Gr.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 5 -->
+        <div class="producto">
+          <div class="tooltip">Harina Finezza</div>
+          <img src="img/harinafinezza.jpg" alt="Harina Finezza">
+          <div class="info">
+            <h3>Harina Finezza</h3>
+            <p>Harina 1 Kg.</p>
+            <div class="precio">$2000</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 6 -->
+        <div class="producto">
+          <div class="tooltip">Jugos Livean en sobre</div>
+          <img src="img/jugoslivean.jpg" alt="Jugos Livean en sobre">
+          <div class="info">
+            <h3>Jugos Livean en sobre</h3>
+            <p>1 sobre de 7 Gr, rinde 1 litro.</p>
+            <div class="precio">$500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 7 -->
+        <div class="producto">
+          <div class="tooltip">Bolsa de basura</div>
+          <img src="img/bolsabasura.jpg" alt="Bolsa de basura">
+          <div class="info">
+            <h3>Bolsa de basura</h3>
+            <p>30 unidades de bolsas de 500 x 700 mm.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 8 -->
+        <div class="producto">
+          <div class="tooltip">Corbatitas</div>
+          <img src="img/corbatitas.jpg" alt="Corbatitas">
+          <div class="info">
+            <h3>Corbatitas</h3>
+            <p>1 bolsa de 400 Gr.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 9 -->
+        <div class="producto">
+          <div class="tooltip">Espirales</div>
+          <img src="img/espirales.jpg" alt="Espirales">
+          <div class="info">
+            <h3>Espirales</h3>
+            <p>1 bolsa de 400 Gr.</p>
+            <div class="precio">$1500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 10 -->
+        <div class="producto">
+          <div class="tooltip">Leche condensada</div>
+          <img src="img/lechecondensada.jpg" alt="Leche condensada">
+          <div class="info">
+            <h3>Leche condensada</h3>
+            <p>1 tarro de 396 Gr.</p>
+            <div class="precio">$2500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 11 -->
+        <div class="producto">
+          <div class="tooltip">Papel Higienico Nacional</div>
+          <img src="img/papelhignacional.jpg" alt="Papel Higienico Nacional">
+          <div class="info">
+            <h3>Papel Higienico Nacional</h3>
+            <p>6 unidades.</p>
+            <div class="precio">$2500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 12 -->
+        <div class="producto">
+          <div class="tooltip">Aceite Cristal</div>
+          <img src="img/aceite1lts.jpg" alt="Aceite Cristal">
+          <div class="info">
+            <h3>Aceite Cristal</h3>
+            <p>1 Lt de aceite de Maravilla.</p>
+            <div class="precio">$2500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 13 -->
+        <div class="producto">
+          <div class="tooltip">Detergente Liquido Brik's</div>
+          <img src="img/detergente2lts.jpg" alt="Detergente Liquido Brik's">
+          <div class="info">
+            <h3>Detergente Liquido Brik's</h3>
+            <p>Recarga de 2 Lts.</p>
+            <div class="precio">$2500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 14 -->
+        <div class="producto">
+          <div class="tooltip">Jabon Liquido Simmonds</div>
+          <img src="img/jabon750ml.jpg" alt="Jabon Liquido Simmonds">
+          <div class="info">
+            <h3>Jabon Liquido Simmonds</h3>
+            <p>Recarga de 750 ml.</p>
+            <div class="precio">$2000</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <!-- Producto 15 -->
+        <div class="producto">
+          <div class="tooltip">1 Kg de Pan</div>
+          <img src="img/pan.jpg" alt="1 Kg de Pan">
+          <div class="info">
+            <h3>1 Kg de Pan</h3>
+            <p>Se debe reservar de un dia para otro, mañana o tarde.</p>
+            <div class="precio">$2500</div>
+            <a href="https://wa.me/56990228288?text=Hola,%20estoy%20interesado%20en%20los%20Lentes%20de%20Sol%20($18.900).%20¿Está%20disponible?" target="_blank" class="btn-whatsapp">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
